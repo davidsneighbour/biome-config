@@ -12,7 +12,7 @@
 	"bugs": "https://github.com/dnbhq/biome-config/issues",
 	"homepage": "https://github.com/dnbhq/biome-config#readme",
 	"devDependencies": {
-		"@biomejs/biome": "2.4.14",
+		"@biomejs/biome": "2.5.0",
 		"@release-it/conventional-changelog": "11.0.0",
 		"@types/node": "25.6.0",
 		"lint-staged": "16.4.0",
@@ -21,7 +21,7 @@
 		"typescript": "6.0.3"
 	},
 	"peerDependencies": {
-		"@biomejs/biome": ">=2.4.14"
+		"@biomejs/biome": ">=2.5.0"
 	},
 	"scripts": {
 		"check": "biome check",
