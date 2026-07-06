@@ -1,64 +1,64 @@
 {
-	"name": "@dnbhq/biome-config",
-	"description": "Shared Biome configuration for DNBHQ projects.",
-	"version": "0.2.2",
-	"license": "MIT",
-	"private": false,
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/dnbhq/biome-config.git"
-	},
-	"author": "Patrick Kollitsch <davidsneighbourdev+gh@gmail.com> (https://davids-neighbour.com)",
-	"bugs": "https://github.com/dnbhq/biome-config/issues",
-	"homepage": "https://github.com/dnbhq/biome-config#readme",
-	"devDependencies": {
-		"@biomejs/biome": "2.5.0",
-		"@release-it/conventional-changelog": "11.0.0",
-		"@types/node": "25.6.0",
-		"lint-staged": "16.4.0",
-		"release-it": "20.0.1",
-		"simple-git-hooks": "2.13.1",
-		"typescript": "6.0.3"
-	},
-	"peerDependencies": {
-		"@biomejs/biome": ">=2.5.0"
-	},
-	"scripts": {
-		"check": "biome check",
-		"lint": "biome lint",
-		"lint:staged": "lint-staged",
-		"prepare": "simple-git-hooks",
-		"release": "release-it",
-		"release:dry": "release-it --dry-run",
-		"test": "npm run check"
-	},
-	"main": "config.json",
-	"files": [
-		"config.json",
-		"README.md",
-		"CHANGELOG.md",
-		"LICENSE"
-	],
-	"publishConfig": {
-		"access": "public",
-		"provenance": true
-	},
-	"engines": {
-		"node": ">=25"
-	},
-	"exports": {
-		".": "./config.json",
-		"./config": "./config.json",
-		"./config.json": "./config.json"
-	},
-	"lint-staged": {
-		"*.{js,json,ts}": [
-			"biome check --write --no-errors-on-unmatched",
-			"biome lint --write --no-errors-on-unmatched"
-		]
-	},
-	"simple-git-hooks": {
-		"pre-commit": "npx lint-staged --allow-empty"
-	},
-	"type": "module"
+  "name": "@dnbhq/biome-config",
+  "description": "Shared Biome configuration for DNBHQ projects.",
+  "version": "0.2.2",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnbhq/biome-config.git"
+  },
+  "author": "Patrick Kollitsch <davidsneighbourdev+gh@gmail.com> (https://davids-neighbour.com)",
+  "bugs": "https://github.com/dnbhq/biome-config/issues",
+  "homepage": "https://github.com/dnbhq/biome-config#readme",
+  "devDependencies": {
+    "@biomejs/biome": "2.5.0",
+    "@release-it/conventional-changelog": "11.0.0",
+    "@types/node": "25.6.0",
+    "lint-staged": "16.4.0",
+    "release-it": "20.0.1",
+    "simple-git-hooks": "2.13.1",
+    "typescript": "6.0.3"
+  },
+  "peerDependencies": {
+    "@biomejs/biome": ">=2.5.0"
+  },
+  "scripts": {
+    "check": "biome check",
+    "lint": "biome lint",
+    "lint:staged": "lint-staged",
+    "prepare": "simple-git-hooks",
+    "release": "release-it",
+    "release:dry": "release-it --dry-run",
+    "test": "npm run check"
+  },
+  "main": "config.json",
+  "files": [
+    "config.json",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=25"
+  },
+  "exports": {
+    ".": "./config.json",
+    "./config": "./config.json",
+    "./config.json": "./config.json"
+  },
+  "lint-staged": {
+    "*.{js,json,ts}": [
+      "biome check --write --no-errors-on-unmatched",
+      "biome lint --write --no-errors-on-unmatched"
+    ]
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged --allow-empty"
+  },
+  "type": "module"
 }
