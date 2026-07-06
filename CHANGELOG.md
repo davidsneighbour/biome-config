@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.2.3](https://github.com/dnbhq/biome-config/compare/v0.2.2...v0.2.3) (2026-07-06)
+
+### Bug Fixes
+
+* **config:** restore recommended:false and add positive files.includes pattern ([6359bb8](https://github.com/dnbhq/biome-config/commit/6359bb86dca94ff6c51f9f9860048aae0383a754))
+
+### Build
+
+* **deps:** upgrade to Biome 2.5.0 ([37aae8d](https://github.com/dnbhq/biome-config/commit/37aae8d88f11564fe899dd8559406c004cdbe96b))
+
+### Styles
+
+* apply biome formatting now that files.includes matches all files ([21b8c8d](https://github.com/dnbhq/biome-config/commit/21b8c8d575817e4aca5ec457f649faddc228bedd))
+
 ## [0.2.2](https://github.com/dnbhq/biome-config/compare/v0.2.1...v0.2.2) (2026-06-22)
 
 ### Bug Fixes
