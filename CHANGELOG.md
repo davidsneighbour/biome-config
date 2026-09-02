@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.6](https://github.com/dnbhq/biome-config/compare/v0.2.5...v0.2.6) (2026-09-02)
+
+### Bug Fixes
+
+* pin release workflow to Node 26 ([127d452](https://github.com/dnbhq/biome-config/commit/127d452ff55f356d2dc24a307c6614d2f59436ed))
+
 ## [0.2.5](https://github.com/dnbhq/biome-config/compare/v0.2.4...v0.2.5) (2026-09-02)
 
 ### Build
