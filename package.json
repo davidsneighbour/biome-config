@@ -44,7 +44,7 @@
     "provenance": true
   },
   "engines": {
-    "node": ">=25"
+    "node": ">=26"
   },
   "exports": {
     ".": "./config.json",
