@@ -13,6 +13,7 @@
   "homepage": "https://github.com/davidsneighbour/biome-config#readme",
   "devDependencies": {
     "@biomejs/biome": "2.5.11",
+    "@dnbhq/release-config": "1.1.3",
     "@release-it/conventional-changelog": "12.0.0",
     "@types/node": "26.4.1",
     "lint-staged": "17.4.1",
