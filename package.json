@@ -12,13 +12,13 @@
   "bugs": "https://github.com/davidsneighbour/biome-config/issues",
   "homepage": "https://github.com/davidsneighbour/biome-config#readme",
   "devDependencies": {
-    "@biomejs/biome": "2.5.0",
-    "@release-it/conventional-changelog": "11.0.0",
-    "@types/node": "25.6.0",
-    "lint-staged": "16.4.0",
-    "release-it": "20.0.1",
-    "simple-git-hooks": "2.13.1",
-    "typescript": "6.0.3"
+    "@biomejs/biome": "2.5.11",
+    "@release-it/conventional-changelog": "12.0.0",
+    "@types/node": "26.4.1",
+    "lint-staged": "17.4.1",
+    "release-it": "21.0.2",
+    "simple-git-hooks": "2.14.0",
+    "typescript": "7.0.2"
   },
   "peerDependencies": {
     "@biomejs/biome": ">=2.5.0"
