@@ -1,16 +1,16 @@
 {
   "name": "@dnbhq/biome-config",
-  "description": "Shared Biome configuration for DNBHQ projects.",
+  "description": "Shared Biome configuration for @davidsneighbour's projects.",
   "version": "0.2.3",
   "license": "MIT",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dnbhq/biome-config.git"
+    "url": "git+https://github.com/davidsneighbour/biome-config.git"
   },
   "author": "Patrick Kollitsch <davidsneighbourdev+gh@gmail.com> (https://davids-neighbour.com)",
-  "bugs": "https://github.com/dnbhq/biome-config/issues",
-  "homepage": "https://github.com/dnbhq/biome-config#readme",
+  "bugs": "https://github.com/davidsneighbour/biome-config/issues",
+  "homepage": "https://github.com/davidsneighbour/biome-config#readme",
   "devDependencies": {
     "@biomejs/biome": "2.5.0",
     "@release-it/conventional-changelog": "11.0.0",

@@ -2,18 +2,19 @@
 
 Shared Biome configuration for @davidsneighbour's projects.
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Available config](#available-config)
-  - [Strict baseline](#strict-baseline)
-- [Design notes](#design-notes)
-- [Release](#release)
-- [Notes](#notes)
+* [Installation](#installation)
+* [Upgrading Biome](#upgrading-biome)
+* [Usage](#usage)
+* [Available config](#available-config)
+  * [Strict baseline](#strict-baseline)
+* [Design notes](#design-notes)
+* [Release](#release)
+* [Notes](#notes)
 
 ## Installation
 
 ```bash
-npm install --save-dev @dnbhq/biome-config @biomejs/biome
+npm install --save-dev @davidsneighbour/biome-config @biomejs/biome
 ```
 
 ## Upgrading Biome
