@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.5](https://github.com/dnbhq/biome-config/compare/v0.2.4...v0.2.5) (2026-09-02)
+
+### Build
+
+* **fix:** don't ask questions on release ([76d3204](https://github.com/dnbhq/biome-config/commit/76d32044dfbd2a505d26eae155bd83aabe3186a7))
+
 ## [0.2.4](https://github.com/dnbhq/biome-config/compare/v0.2.3...v0.2.4) (2026-09-02)
 
 ### Bug Fixes
