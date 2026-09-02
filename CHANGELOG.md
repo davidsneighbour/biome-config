@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.7](https://github.com/dnbhq/biome-config/compare/v0.2.6...v0.2.7) (2026-09-02)
+
+### Build
+
+* onboard to @dnbhq/release-config ([6d8ff07](https://github.com/dnbhq/biome-config/commit/6d8ff07687a9c7d19a20f77ac32ea256cbfacb98))
+
 ## [0.2.6](https://github.com/dnbhq/biome-config/compare/v0.2.5...v0.2.6) (2026-09-02)
 
 ### Bug Fixes
