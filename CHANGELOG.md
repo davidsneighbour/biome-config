@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.4](https://github.com/dnbhq/biome-config/compare/v0.2.3...v0.2.4) (2026-09-02)
+
+### Bug Fixes
+
+* migrate to [@davidsneighbour](https://github.com/davidsneighbour) ([39d168f](https://github.com/dnbhq/biome-config/commit/39d168fa757fcf3aa6e7a12e03bcd7562895f550))
+
+### Build
+
+* **deps:** update dependencies ([79e0b74](https://github.com/dnbhq/biome-config/commit/79e0b742c840005fc2550537bb620122300ab2c4))
+
 ## [0.2.3](https://github.com/dnbhq/biome-config/compare/v0.2.2...v0.2.3) (2026-07-06)
 
 ### Bug Fixes
