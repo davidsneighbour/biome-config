@@ -1,14 +1,5 @@
 # Changelog
 
-## Unreleased
-
-### Changed
-
-* Simplified the shared Biome configuration to rely on Biome defaults and the recommended preset.
-* Kept only deliberate shared rules: `noBarrelFile`, `noReExportAll`, and `noUndeclaredVariables`.
-* Removed JavaScript quote-style overrides, duplicated formatter defaults, redundant browser globals, and no-op overrides.
-* Added `policy.json` as the canonical machine-readable shared policy and generate/check scripts to prevent `config.json` drift.
-
 ## [0.2.7](https://github.com/dnbhq/biome-config/compare/v0.2.6...v0.2.7) (2026-09-02)
 
 ### Build
@@ -98,4 +89,4 @@
 ### Documentation
 
 * add changelog ([50141be](https://github.com/dnbhq/biome-config/commit/50141be03b798606cf292fd5634a5d39615faa87))
-* add license ([4bda09d](https://github.com/dnbhq/biome-config/commit/4bda09d38bdc8918e9ea8842e42ace9a4b675d79))
+* add license ([4bda09d](https://github.com/dnbhq/biome-config/commit/4bda09d38bdc89190dae95544875c316d82af7))
