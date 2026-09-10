@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.1](https://github.com/dnbhq/biome-config/compare/v0.3.0...v0.3.1) (2026-09-10)
+
+### Fix
+
+* align schema and formatting with Biome 2.5.11 ([158dfa8](https://github.com/dnbhq/biome-config/commit/158dfa83d35dcc448464f2c5b27f11f2ef305a11))
+
 ## [0.3.0](https://github.com/dnbhq/biome-config/compare/v0.2.7...v0.3.0) (2026-09-10)
 
 ### Feat
