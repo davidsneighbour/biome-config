@@ -1,0 +1,36 @@
+{
+  "formatting": {
+    "indentStyle": "space",
+    "useEditorconfig": true
+  },
+  "biome": {
+    "files": {
+      "includes": ["**", "!build", "!coverage"]
+    },
+    "assist": {
+      "actions": {
+        "source": {
+          "organizeImports": "on"
+        }
+      }
+    },
+    "linter": {
+      "rules": {
+        "preset": "recommended",
+        "performance": {
+          "noBarrelFile": "error",
+          "noReExportAll": "error"
+        },
+        "correctness": {
+          "noUndeclaredVariables": "error"
+        }
+      }
+    },
+    "vcs": {
+      "enabled": true,
+      "clientKind": "git",
+      "useIgnoreFile": true,
+      "defaultBranch": "main"
+    }
+  }
+}
