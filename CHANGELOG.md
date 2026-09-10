@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.3.0](https://github.com/dnbhq/biome-config/compare/v0.2.7...v0.3.0) (2026-09-10)
+
+### Feat
+
+* add canonical style policy ([fca1d13](https://github.com/dnbhq/biome-config/commit/fca1d13c8f849171695697fe05776ae4d1e46caf))
+* generate biome config from policy ([f9bab77](https://github.com/dnbhq/biome-config/commit/f9bab77890a9da0e52ac01afde4237ff65bd9f32))
+* verify generated biome config ([eed35b6](https://github.com/dnbhq/biome-config/commit/eed35b66d209ba52f4e91e1230de9e1c37e4b2f6))
+
+### Fix
+
+* keep generated config biome-stable ([ff80711](https://github.com/dnbhq/biome-config/commit/ff80711f6e20b8b2aafb5c75e6ad90dd1c412d94))
+* match biome array formatting ([12140f1](https://github.com/dnbhq/biome-config/commit/12140f1f6bf1a4defab2778b52061e436f955f0e))
+* preserve changelog history ([132b430](https://github.com/dnbhq/biome-config/commit/132b430da39b0ce5c8952ac14dea033dea4f8793))
+
+### Refactor
+
+* simplify biome defaults ([a4f8db9](https://github.com/dnbhq/biome-config/commit/a4f8db94560b5b50197f1d00126159eff7066477))
+
+### Docs
+
+* document soft biome policy ([e4c6b1d](https://github.com/dnbhq/biome-config/commit/e4c6b1d157e0d1fb560ec050139c32b3796a82fd))
+* let release tooling own changelog entries ([f15d4d0](https://github.com/dnbhq/biome-config/commit/f15d4d0ca0f8cb261c4f7447d12908e1203d89bd))
+* record soft biome configuration ([909bb02](https://github.com/dnbhq/biome-config/commit/909bb02321c5eae1e8008f661e82c1a34e022d66))
+
+### Build
+
+* **ai:** add agent instructions ([3090f24](https://github.com/dnbhq/biome-config/commit/3090f2479f803092bdcff664776c625c4851650d))
+
 ## [0.2.7](https://github.com/dnbhq/biome-config/compare/v0.2.6...v0.2.7) (2026-09-02)
 
 ### Build
