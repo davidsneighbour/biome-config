@@ -65,7 +65,14 @@ function createBiomeConfig(policy) {
 }
 
 function serialize(value) {
-  return `${JSON.stringify(value, null, 2)}\n`;
+  const serialized = JSON.stringify(value, null, 2);
+  const expandedIncludes = JSON.stringify(value.files.includes, null, 2)
+    .split("\n")
+    .map((line, index) => (index === 0 ? line : `    ${line}`))
+    .join("\n");
+  const compactIncludes = JSON.stringify(value.files.includes);
+
+  return `${serialized.replace(expandedIncludes, compactIncludes)}\n`;
 }
 
 async function main() {
