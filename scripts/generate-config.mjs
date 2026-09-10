@@ -70,7 +70,7 @@ function serialize(value) {
     .split("\n")
     .map((line, index) => (index === 0 ? line : `    ${line}`))
     .join("\n");
-  const compactIncludes = JSON.stringify(value.files.includes);
+  const compactIncludes = `[${value.files.includes.map((entry) => JSON.stringify(entry)).join(", ")}]`;
 
   return `${serialized.replace(expandedIncludes, compactIncludes)}\n`;
 }
