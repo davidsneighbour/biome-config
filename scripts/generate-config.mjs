@@ -5,7 +5,7 @@ import process from "node:process";
 const ROOT = resolve(import.meta.dirname, "..");
 const POLICY_PATH = resolve(ROOT, "policy.json");
 const CONFIG_PATH = resolve(ROOT, "config.json");
-const SCHEMA = "https://biomejs.dev/schemas/2.5.0/schema.json";
+const SCHEMA = "https://biomejs.dev/schemas/2.5.11/schema.json";
 
 function printHelp() {
   console.log(`Usage: node scripts/generate-config.mjs [--check | --write] [--help]
@@ -46,7 +46,9 @@ function validatePolicy(policy) {
   }
 
   if (policy?.biome?.linter?.rules?.preset !== "recommended") {
-    throw new Error('policy.json must use the Biome "recommended" rules preset.');
+    throw new Error(
+      'policy.json must use the Biome "recommended" rules preset.',
+    );
   }
 }
 
