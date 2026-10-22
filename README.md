@@ -9,6 +9,8 @@ Shared Biome configuration for @davidsneighbour's projects.
 * [Generated config](#generated-config)
 * [Available config](#available-config)
   * [Soft baseline](#soft-baseline)
+  * [Markdown](#markdown)
+  * [YAML](#yaml)
 * [Design notes](#design-notes)
 * [Release](#release)
 * [Notes](#notes)
@@ -61,6 +63,9 @@ The policy follows these rules:
 * Do not promote warnings to errors or demote errors to warnings unless a future policy explicitly requires it.
 * Enable `performance/noBarrelFile`, `performance/noReExportAll`, and `correctness/noUndeclaredVariables` as additional errors.
 * Let Biome choose JavaScript and TypeScript quote style from its defaults.
+* Parse Markdown frontmatter, lint Markdown, and do not format Markdown with Biome (see [Markdown](#markdown)).
+* Format and lint YAML with Biome defaults (see [YAML](#yaml)).
+* Enable the nursery rules `nursery/noDuplicateMapKeys` and `nursery/useSingleTopLevelHeading` as additional errors.
 
 The package exports the policy as `@dnbhq/biome-config/policy` and `@dnbhq/biome-config/policy.json`. Other shared configuration packages can consume this machine-readable policy instead of duplicating cross-tool decisions.
 
@@ -93,6 +98,37 @@ The package exports one shared Biome configuration:
 ```
 
 The baseline enables import organisation and VCS integration, follows Biome's recommended lint rules at their default severities, and adds only the explicitly documented project rules.
+
+The config requires Biome 2.6 or later, because it uses the `markdown` options that Biome 2.6 introduced.
+
+### Markdown
+
+Biome 2.6 parses, formats, and lints Markdown. The shared config uses it as follows:
+
+* `markdown.parser.frontmatter` is `true`. Without it, Biome reads a frontmatter block as a thematic break and a setext heading, and lint results for content files are wrong.
+* `markdown.formatter.enabled` is `false`. [`@dnbhq/markdownlint-config`](https://github.com/davidsneighbour/markdownlint-config) stays the authority for Markdown style. The Biome 2.6 formatter has no options for these markdownlint rules and rewrites the content against them:
+  * `MD004` requires `*` list markers. Biome writes `-`.
+  * `MD049` requires `*` for emphasis. Biome writes `_`.
+  * `MD060` requires compact tables. Biome pads table cells to align the columns.
+* The Markdown linter stays on (Biome default). `nursery/useSingleTopLevelHeading` matches markdownlint `MD025`.
+* `nursery/useTopLevelHeading` is not enabled. It reports documents that take their title from frontmatter, for example Hugo content files. markdownlint `MD041` accepts a frontmatter `title`.
+* `markdown.analyzeEmbeds` stays `false` (Biome default). Code examples in documentation are often incomplete and would trigger rules such as `noUndeclaredVariables`.
+
+A project that does not use markdownlint can turn the formatter on in its local `biome.json`:
+
+```json
+{
+  "markdown": {
+    "formatter": {
+      "enabled": true
+    }
+  }
+}
+```
+
+### YAML
+
+Biome 2.6 formats and lints YAML by default. The shared config keeps the Biome defaults: 2-space indentation, double quotes, and the line width from `.editorconfig` (`useEditorconfig`). It adds `nursery/noDuplicateMapKeys` as an error, because a duplicate key silently overwrites the earlier value.
 
 ## Design notes
 

@@ -16,7 +16,7 @@ This repository publishes a shared Biome configuration (`config.json`) consumed 
 
 - Run `npm run check` before committing — it runs `biome check` against the repo and is also the `test` script.
 - `npm run lint` runs `biome lint` only.
-- The pre-commit hook (simple-git-hooks + lint-staged) runs `biome check --write` and `biome lint --write` on staged `*.{js,json,ts}` files automatically.
+- The pre-commit hook (simple-git-hooks + lint-staged) runs `biome check --write` and `biome lint --write` on staged `*.{js,json,md,mjs,ts,yaml,yml}` files automatically.
 - Formatting follows `.editorconfig`: 2-space indent, LF line endings, trim trailing whitespace (except Markdown), 120-character max line length.
 
 ## Commit and release conventions

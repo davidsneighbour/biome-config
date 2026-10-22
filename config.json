@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.5.11/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.6.2/schema.json",
   "files": {
     "includes": ["**", "!build", "!coverage"]
   },
@@ -23,7 +23,19 @@
       },
       "correctness": {
         "noUndeclaredVariables": "error"
+      },
+      "nursery": {
+        "noDuplicateMapKeys": "error",
+        "useSingleTopLevelHeading": "error"
       }
+    }
+  },
+  "markdown": {
+    "parser": {
+      "frontmatter": true
+    },
+    "formatter": {
+      "enabled": false
     }
   },
   "vcs": {

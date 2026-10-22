@@ -23,7 +23,19 @@
         },
         "correctness": {
           "noUndeclaredVariables": "error"
+        },
+        "nursery": {
+          "noDuplicateMapKeys": "error",
+          "useSingleTopLevelHeading": "error"
         }
+      }
+    },
+    "markdown": {
+      "parser": {
+        "frontmatter": true
+      },
+      "formatter": {
+        "enabled": false
       }
     },
     "vcs": {

@@ -5,7 +5,7 @@ import process from "node:process";
 const ROOT = resolve(import.meta.dirname, "..");
 const POLICY_PATH = resolve(ROOT, "policy.json");
 const CONFIG_PATH = resolve(ROOT, "config.json");
-const SCHEMA = "https://biomejs.dev/schemas/2.5.11/schema.json";
+const SCHEMA = "https://biomejs.dev/schemas/2.6.2/schema.json";
 
 function printHelp() {
   console.log(`Usage: node scripts/generate-config.mjs [--check | --write] [--help]
@@ -62,6 +62,7 @@ function createBiomeConfig(policy) {
     },
     assist: policy.biome.assist,
     linter: policy.biome.linter,
+    markdown: policy.biome.markdown,
     vcs: policy.biome.vcs,
   };
 }
