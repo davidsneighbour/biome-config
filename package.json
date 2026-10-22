@@ -66,5 +66,13 @@
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged --allow-empty"
   },
-  "type": "module"
+  "type": "module",
+  "overrides": {
+    "get-uri": {
+      "basic-ftp": "^6.2.1"
+    },
+    "release-it": {
+      "undici": "^7.29.1"
+    }
+  }
 }
