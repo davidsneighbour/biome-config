@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.0.0](https://github.com/dnbhq/biome-config/compare/v0.3.1...v1.0.0) (2026-10-23)
+
+### ⚠ BREAKING CHANGES
+
+* the shared config now requires @biomejs/biome >=2.6.0.
+
+### Feat
+
+* support Biome 2.6 Markdown and YAML ([c6eb5a9](https://github.com/dnbhq/biome-config/commit/c6eb5a98aba5c6e214d8ef0f34ee002bf89760fb))
+
+### Build
+
+* **deps:** override basic-ftp and undici to patched versions ([b9198f4](https://github.com/dnbhq/biome-config/commit/b9198f4ba41ff9005f727ff9c0be412878c33045))
+
 ## [0.3.1](https://github.com/dnbhq/biome-config/compare/v0.3.0...v0.3.1) (2026-09-10)
 
 ### Fix
