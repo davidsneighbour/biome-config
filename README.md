@@ -3,6 +3,7 @@
 Shared Biome configuration for @davidsneighbour's projects.
 
 * [Installation](#installation)
+* [Schema version](#schema-version)
 * [Upgrading Biome](#upgrading-biome)
 * [Usage](#usage)
 * [Configuration policy](#configuration-policy)
@@ -18,18 +19,47 @@ Shared Biome configuration for @davidsneighbour's projects.
 ## Installation
 
 ```bash
-npm install --save-dev @davidsneighbour/biome-config @biomejs/biome
+npm install --save-dev @dnbhq/biome-config @biomejs/biome
 ```
+
+## Schema version
+
+Biome reports an info diagnostic for each configuration file whose `$schema` version differs from the CLI version, including configs loaded through `extends`. The package therefore has a `postinstall` hook (`scripts/postinstall.mjs`) that sets the `$schema` value of the installed `config.json` to the version of `@biomejs/biome` in the consuming project.
+
+The hook:
+
+* Finds `config.json` relative to its own package directory and resolves `@biomejs/biome` with Node.js module resolution from there. The directory npm runs it from has no effect.
+* Changes only the `$schema` value. It does not change policy values or formatting, and it stops if any other value would change.
+* Does nothing when the schema already matches. Repeated installs are safe.
+* Keeps the shipped schema and prints a notice when Biome is not installed or is older than 2.6.0.
+* Never fails the install. If it cannot write the file, it prints a notice and leaves `config.json` unchanged.
+
+The hook does not use `biome migrate --write --config-path=...`. Biome 2.6 does not process files below `node_modules`, so this command fails for the installed `config.json` ("does not exist in the workspace"), also when `node_modules` is not in `.gitignore`.
+
+npm runs the hook only when it installs `@dnbhq/biome-config`. After you upgrade only `@biomejs/biome`, run the hook again:
+
+```bash
+npm rebuild @dnbhq/biome-config
+```
+
+Recent npm versions (checked with npm 11.20) list dependencies with install scripts that `allowScripts` in `package.json` does not cover. To approve the hook:
+
+```bash
+npm install-scripts approve @dnbhq/biome-config
+```
+
+With `strict-allow-scripts=true`, npm fails the install until you approve the hook. If install scripts are skipped (`--ignore-scripts` or a denial in `allowScripts`), `config.json` keeps the schema of the Biome version that the package was released with. Biome then reports the info diagnostic, but it still loads the configuration.
 
 ## Upgrading Biome
 
-After upgrading `@biomejs/biome` to a new version, run Biome's built-in migration command to update your config automatically:
+After upgrading `@biomejs/biome` to a new version, run Biome's built-in migration command to update your local `biome.json`, and update the schema of the shared config (see [Schema version](#schema-version)):
 
 ```bash
 npx @biomejs/biome migrate --write
+npm rebuild @dnbhq/biome-config
 ```
 
-Then regenerate and verify the shared config:
+In this repository, regenerate and verify the shared config:
 
 ```bash
 npm run config:generate
@@ -84,6 +114,8 @@ npm run config:check
 ```
 
 `npm test` runs the drift check before Biome itself. CI therefore fails when `config.json` and `policy.json` disagree.
+
+The generator takes the `$schema` version from the installed `@biomejs/biome` package. Run `npm install` before you generate or check the config.
 
 ## Available config
 
@@ -163,6 +195,6 @@ Publishing is handled by the `Publish package` GitHub Actions workflow when a `v
 ## Notes
 
 * The consuming project should install `@biomejs/biome` directly so editor integrations, CLI usage, and lockfiles remain project-local.
-* The package includes `config.json`, `policy.json`, `README.md`, `CHANGELOG.md`, and `LICENSE` in the npm package.
+* The package includes `config.json`, `policy.json`, `scripts/postinstall.mjs`, `scripts/biome-schema.mjs`, `README.md`, `CHANGELOG.md`, and `LICENSE` in the npm package.
 * Do not edit generated `config.json` manually; edit `policy.json` and run `npm run config:generate`.
 * Use `npm test` before releasing.
