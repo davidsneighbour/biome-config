@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/davidsneighbour/biome-config/compare/v1.0.0...v1.1.0) (2026-11-02)
+
+### Feat
+
+* sync config.json schema with the installed Biome version ([708ebab](https://github.com/davidsneighbour/biome-config/commit/708ebabe5d7f3eaabfb965a93e971bebe443e993))
+
+### Docs
+
+* add consumer postinstall script for Biome migration ([b65711e](https://github.com/davidsneighbour/biome-config/commit/b65711e2f9b7b7e820d17007117bda5a3acf4fca))
+
+### Build
+
+* **deps:** update development dependencies ([e90a2bd](https://github.com/davidsneighbour/biome-config/commit/e90a2bd1df78d903afe05679c9539c39a53d2719))
+
 ## [1.0.0](https://github.com/dnbhq/biome-config/compare/v0.3.1...v1.0.0) (2026-10-23)
 
 ### ⚠ BREAKING CHANGES
