@@ -22,6 +22,27 @@ Shared Biome configuration for @davidsneighbour's projects.
 npm install --save-dev @dnbhq/biome-config @biomejs/biome
 ```
 
+Add a `postinstall` script to the `package.json` of the consuming project:
+
+```json
+{
+  "scripts": {
+    "postinstall": "biome migrate --write && npm rebuild @dnbhq/biome-config"
+  }
+}
+```
+
+On each `npm install` and `npm ci`, the script:
+
+* Runs `biome migrate --write`. This migrates the `biome.json` of the project to the installed Biome version, including renamed or deprecated keys and the `$schema` value. When nothing changes, the command reports "no migration needed" and exits with 0.
+* Runs `npm rebuild @dnbhq/biome-config`. This runs the schema hook of this package again (see [Schema version](#schema-version)), because `biome migrate` does not change the shared config.
+
+Notes:
+
+* npm runs the `postinstall` script of the project only for `npm install` without package arguments and for `npm ci`. After `npm install --save-dev @biomejs/biome@<version>`, run `npm install` once more.
+* `biome migrate --write` changes `biome.json`. Review and commit the change after a Biome upgrade.
+* The script needs Biome. An install without dev dependencies (`npm ci --omit=dev`) fails. If the project installs without dev dependencies, use `biome migrate --write && npm rebuild @dnbhq/biome-config || exit 0`. This variant also hides failed migrations, so check the output of `npm install`.
+
 ## Schema version
 
 Biome reports an info diagnostic for each configuration file whose `$schema` version differs from the CLI version, including configs loaded through `extends`. The package therefore has a `postinstall` hook (`scripts/postinstall.mjs`) that sets the `$schema` value of the installed `config.json` to the version of `@biomejs/biome` in the consuming project.
@@ -36,7 +57,7 @@ The hook:
 
 The hook does not use `biome migrate --write --config-path=...`. Biome 2.6 does not process files below `node_modules`, so this command fails for the installed `config.json` ("does not exist in the workspace"), also when `node_modules` is not in `.gitignore`.
 
-npm runs the hook only when it installs `@dnbhq/biome-config`. After you upgrade only `@biomejs/biome`, run the hook again:
+npm runs the hook only when it installs `@dnbhq/biome-config`. The `postinstall` script from [Installation](#installation) runs it again on each install. Without that script, run the hook again after you upgrade only `@biomejs/biome`:
 
 ```bash
 npm rebuild @dnbhq/biome-config
@@ -52,7 +73,7 @@ With `strict-allow-scripts=true`, npm fails the install until you approve the ho
 
 ## Upgrading Biome
 
-After upgrading `@biomejs/biome` to a new version, run Biome's built-in migration command to update your local `biome.json`, and update the schema of the shared config (see [Schema version](#schema-version)):
+After upgrading `@biomejs/biome` to a new version, run `npm install`. The `postinstall` script from [Installation](#installation) migrates your local `biome.json` and updates the schema of the shared config. Without that script, run the commands yourself (see [Schema version](#schema-version)):
 
 ```bash
 npx @biomejs/biome migrate --write
