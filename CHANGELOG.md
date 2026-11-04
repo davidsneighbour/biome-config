@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1](https://github.com/davidsneighbour/biome-config/compare/v1.1.0...v1.1.1) (2026-11-04)
+
+### Fix
+
+* remove shared config schema version coupling ([5c26c25](https://github.com/davidsneighbour/biome-config/commit/5c26c25dcc10aafe547101486c3ba663a8d6f228))
+
 ## [1.1.0](https://github.com/davidsneighbour/biome-config/compare/v1.0.0...v1.1.0) (2026-11-02)
 
 ### Feat
