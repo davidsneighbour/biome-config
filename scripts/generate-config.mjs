@@ -1,13 +1,9 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import process from "node:process";
-import {
-  CONFIG_PATH,
-  PACKAGE_ROOT,
-  resolveBiomeVersion,
-  schemaUrl,
-} from "./biome-schema.mjs";
 
+const PACKAGE_ROOT = resolve(import.meta.dirname, "..");
+const CONFIG_PATH = resolve(PACKAGE_ROOT, "config.json");
 const POLICY_PATH = resolve(PACKAGE_ROOT, "policy.json");
 
 function printHelp() {
@@ -17,7 +13,6 @@ Options:
   --check  Verify config.json matches policy.json without modifying files.
   --write  Regenerate config.json from policy.json. This is the default.
 
-The $schema value uses the installed @biomejs/biome version.
   --help   Show this help text.
 `);
 }
@@ -57,9 +52,8 @@ function validatePolicy(policy) {
   }
 }
 
-function createBiomeConfig(policy, schema) {
+function createBiomeConfig(policy) {
   return {
-    $schema: schema,
     files: policy.biome.files,
     formatter: {
       indentStyle: policy.formatting.indentStyle,
@@ -95,15 +89,7 @@ async function main() {
   const policy = JSON.parse(rawPolicy);
   validatePolicy(policy);
 
-  const biomeVersion = await resolveBiomeVersion();
-
-  if (biomeVersion === undefined) {
-    throw new Error("@biomejs/biome is not installed. Run npm install.");
-  }
-
-  const expected = serialize(
-    createBiomeConfig(policy, schemaUrl(biomeVersion)),
-  );
+  const expected = serialize(createBiomeConfig(policy));
 
   if (mode === "check") {
     const actual = await readFile(CONFIG_PATH, "utf8");

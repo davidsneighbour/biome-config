@@ -22,7 +22,7 @@
     "typescript": "7.0.2"
   },
   "peerDependencies": {
-    "@biomejs/biome": ">=2.6.0"
+    "@biomejs/biome": ">=2.6.0 <3"
   },
   "scripts": {
     "check": "biome check",
@@ -30,7 +30,6 @@
     "config:generate": "node scripts/generate-config.mjs --write",
     "lint": "biome lint",
     "lint:staged": "lint-staged",
-    "postinstall": "node scripts/postinstall.mjs",
     "prepare": "simple-git-hooks",
     "release": "release-it --ci",
     "release:dry": "release-it --dry-run",
@@ -40,8 +39,6 @@
   "files": [
     "config.json",
     "policy.json",
-    "scripts/biome-schema.mjs",
-    "scripts/postinstall.mjs",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"

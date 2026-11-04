@@ -3,7 +3,8 @@
 Shared Biome configuration for @davidsneighbour's projects.
 
 * [Installation](#installation)
-* [Schema version](#schema-version)
+* [Supported versions](#supported-versions)
+* [Schema](#schema)
 * [Upgrading Biome](#upgrading-biome)
 * [Usage](#usage)
 * [Configuration policy](#configuration-policy)
@@ -19,66 +20,40 @@ Shared Biome configuration for @davidsneighbour's projects.
 ## Installation
 
 ```bash
-npm install --save-dev @dnbhq/biome-config @biomejs/biome
+npm install --save-dev @dnbhq/biome-config
+npm install --save-dev --save-exact @biomejs/biome@2.6.4
 ```
 
-Add a `postinstall` script to the `package.json` of the consuming project:
+No installation hook or consumer `postinstall` script is required. If you previously added `biome migrate --write && npm rebuild @dnbhq/biome-config` only for this package, remove that script. Preserve any unrelated installation tasks.
 
-```json
-{
-  "scripts": {
-    "postinstall": "biome migrate --write && npm rebuild @dnbhq/biome-config"
-  }
-}
-```
+## Supported versions
 
-On each `npm install` and `npm ci`, the script:
+* Supported Biome range: `>=2.6.0 <3`.
+* Recommended and tested Biome version: `2.6.4`.
+* This repository pins its development dependency to the tested version. Consumers can select another version within the peer dependency range.
 
-* Runs `biome migrate --write`. This migrates the `biome.json` of the project to the installed Biome version, including renamed or deprecated keys and the `$schema` value. When nothing changes, the command reports "no migration needed" and exits with 0.
-* Runs `npm rebuild @dnbhq/biome-config`. This runs the schema hook of this package again (see [Schema version](#schema-version)), because `biome migrate` does not change the shared config.
+The minimum reflects the Markdown options introduced in Biome 2.6. Compatibility with 2.6.0 has not yet been verified by a runtime test. The range excludes Biome 3 until its compatibility is checked.
 
-Notes:
+Pin the Biome version in each consuming project and commit its lockfile for repeatable local and CI checks. A supported range permits independent upgrades; it does not guarantee identical lint or formatting results across releases. In particular, recommended defaults and nursery rules can change. Review upgrades before adopting them.
 
-* npm runs the `postinstall` script of the project only for `npm install` without package arguments and for `npm ci`. After `npm install --save-dev @biomejs/biome@<version>`, run `npm install` once more.
-* `biome migrate --write` changes `biome.json`. Review and commit the change after a Biome upgrade.
-* The script needs Biome. An install without dev dependencies (`npm ci --omit=dev`) fails. If the project installs without dev dependencies, use `biome migrate --write && npm rebuild @dnbhq/biome-config || exit 0`. This variant also hides failed migrations, so check the output of `npm install`.
+## Schema
 
-## Schema version
+The published `config.json` has no `$schema`. Biome still validates its configuration, but the shared file does not declare a version that can conflict with the consumer's CLI. The package does not rewrite installed files and has no installation hook.
 
-Biome reports an info diagnostic for each configuration file whose `$schema` version differs from the CLI version, including configs loaded through `extends`. The package therefore has a `postinstall` hook (`scripts/postinstall.mjs`) that sets the `$schema` value of the installed `config.json` to the version of `@biomejs/biome` in the consuming project.
+Keep `$schema` in the consuming project's `biome.json`, using the schema supplied by its local Biome installation (see [Usage](#usage)). This provides editor completion and documentation for that installed version without a fixed schema URL. The repository's own `biome.json` uses the same approach.
 
-The hook:
-
-* Finds `config.json` relative to its own package directory and resolves `@biomejs/biome` with Node.js module resolution from there. The directory npm runs it from has no effect.
-* Changes only the `$schema` value. It does not change policy values or formatting, and it stops if any other value would change.
-* Does nothing when the schema already matches. Repeated installs are safe.
-* Keeps the shipped schema and prints a notice when Biome is not installed or is older than 2.6.0.
-* Never fails the install. If it cannot write the file, it prints a notice and leaves `config.json` unchanged.
-
-The hook does not use `biome migrate --write --config-path=...`. Biome 2.6 does not process files below `node_modules`, so this command fails for the installed `config.json` ("does not exist in the workspace"), also when `node_modules` is not in `.gitignore`.
-
-npm runs the hook only when it installs `@dnbhq/biome-config`. The `postinstall` script from [Installation](#installation) runs it again on each install. Without that script, run the hook again after you upgrade only `@biomejs/biome`:
-
-```bash
-npm rebuild @dnbhq/biome-config
-```
-
-Recent npm versions (checked with npm 11.20) list dependencies with install scripts that `allowScripts` in `package.json` does not cover. To approve the hook:
-
-```bash
-npm install-scripts approve @dnbhq/biome-config
-```
-
-With `strict-allow-scripts=true`, npm fails the install until you approve the hook. If install scripts are skipped (`--ignore-scripts` or a denial in `allowScripts`), `config.json` keeps the schema of the Biome version that the package was released with. Biome then reports the info diagnostic, but it still loads the configuration.
+There is one generated shared configuration; a separate schema-less build is not needed.
 
 ## Upgrading Biome
 
-After upgrading `@biomejs/biome` to a new version, run `npm install`. The `postinstall` script from [Installation](#installation) migrates your local `biome.json` and updates the schema of the shared config. Without that script, run the commands yourself (see [Schema version](#schema-version)):
+Install the selected version explicitly, then migrate the project's local configuration if required:
 
 ```bash
+npm install --save-dev --save-exact @biomejs/biome@<version>
 npx @biomejs/biome migrate --write
-npm rebuild @dnbhq/biome-config
 ```
+
+Review migration changes, run the project's checks, and commit the configuration and lockfile updates. Keep or restore the local schema path shown in [Usage](#usage) if migration replaces it with a versioned URL. There is no need to rebuild this shared package after a Biome upgrade.
 
 In this repository, regenerate and verify the shared config:
 
@@ -96,7 +71,7 @@ Create or update `biome.json` in the consuming project:
 ```json
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "extends": ["./node_modules/@dnbhq/biome-config/config.json"]
+  "extends": ["@dnbhq/biome-config"]
 }
 ```
 
@@ -136,7 +111,7 @@ npm run config:check
 
 `npm test` runs the drift check before Biome itself. CI therefore fails when `config.json` and `policy.json` disagree.
 
-The generator takes the `$schema` version from the installed `@biomejs/biome` package. Run `npm install` before you generate or check the config.
+The generator creates schema-less `config.json` from `policy.json` and does not depend on the installed Biome version. Biome is required to run the lint and formatting checks.
 
 ## Available config
 
@@ -146,13 +121,13 @@ The package exports one shared Biome configuration:
 
 ```json
 {
-  "extends": ["./node_modules/@dnbhq/biome-config/config.json"]
+  "extends": ["@dnbhq/biome-config"]
 }
 ```
 
 The baseline enables import organisation and VCS integration, follows Biome's recommended lint rules at their default severities, and adds only the explicitly documented project rules.
 
-The config requires Biome 2.6 or later, because it uses the `markdown` options that Biome 2.6 introduced.
+The config supports Biome `>=2.6.0 <3`, because it uses the `markdown` options that Biome 2.6 introduced. See [Supported versions](#supported-versions) for the tested version and verification limits.
 
 ### Markdown
 
@@ -216,6 +191,6 @@ Publishing is handled by the `Publish package` GitHub Actions workflow when a `v
 ## Notes
 
 * The consuming project should install `@biomejs/biome` directly so editor integrations, CLI usage, and lockfiles remain project-local.
-* The package includes `config.json`, `policy.json`, `scripts/postinstall.mjs`, `scripts/biome-schema.mjs`, `README.md`, `CHANGELOG.md`, and `LICENSE` in the npm package.
+* The package includes `config.json`, `policy.json`, `README.md`, `CHANGELOG.md`, and `LICENSE` in the npm package.
 * Do not edit generated `config.json` manually; edit `policy.json` and run `npm run config:generate`.
 * Use `npm test` before releasing.
