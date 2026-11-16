@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.2](https://github.com/davidsneighbour/biome-config/compare/v1.1.1...v1.1.2) (2026-11-16)
+
+### Fix
+
+* remove schema from config ([a0c1a77](https://github.com/davidsneighbour/biome-config/commit/a0c1a77e671f7555b38835e9ee5f254678a936fb))
+
 ## [1.1.1](https://github.com/davidsneighbour/biome-config/compare/v1.1.0...v1.1.1) (2026-11-04)
 
 ### Fix
