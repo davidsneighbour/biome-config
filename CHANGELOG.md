@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.3](https://github.com/davidsneighbour/biome-config/compare/v1.1.2...v1.1.3) (2026-11-16)
+
+### Fix
+
+* readd schema from config ([1d494c2](https://github.com/davidsneighbour/biome-config/commit/1d494c2ade9872bb7417c9c056ae0ef4a19f1db1))
+
 ## [1.1.2](https://github.com/davidsneighbour/biome-config/compare/v1.1.1...v1.1.2) (2026-11-16)
 
 ### Fix
